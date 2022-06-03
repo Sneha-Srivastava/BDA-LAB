@@ -1,0 +1,186 @@
+hduser@bmsce-Precision-T1700:~$ sudo su hduser
+[sudo] password for hduser: 
+hduser@bmsce-Precision-T1700:~$ start-all.sh
+This script is Deprecated. Instead use start-dfs.sh and start-yarn.sh
+Starting namenodes on [localhost]
+hduser@localhost's password: 
+localhost: namenode running as process 5434. Stop it first.
+hduser@localhost's password: 
+localhost: starting datanode, logging to /usr/local/hadoop/logs/hadoop-hduser-datanode-bmsce-Precision-T1700.out
+Starting secondary namenodes [0.0.0.0]
+hduser@0.0.0.0's password: 
+0.0.0.0: starting secondarynamenode, logging to /usr/local/hadoop/logs/hadoop-hduser-secondarynamenode-bmsce-Precision-T1700.out
+starting yarn daemons
+starting resourcemanager, logging to /usr/local/hadoop/logs/yarn-hduser-resourcemanager-bmsce-Precision-T1700.out
+hduser@localhost's password: 
+localhost: starting nodemanager, logging to /usr/local/hadoop/logs/yarn-hduser-nodemanager-bmsce-Precision-T1700.out
+hduser@bmsce-Precision-T1700:~$ jps
+6644 Jps
+5816 DataNode
+6522 NodeManager
+5434 NameNode
+6188 ResourceManager
+6029 SecondaryNameNode
+hduser@bmsce-Precision-T1700:~$ hdfs dfs -mkdir/sneha
+-mkdir/sneha: Unknown command
+hduser@bmsce-Precision-T1700:~$ hdfs dfs -mkdir /sneha
+hduser@bmsce-Precision-T1700:~$ hdfs dfs -ls /
+Found 6 items
+drwxr-xr-x   - hduser supergroup          0 2022-06-01 09:45 /195
+drwxr-xr-x   - hduser supergroup          0 2022-05-31 10:20 /geto
+drwxr-xr-x   - hduser supergroup          0 2022-05-31 10:17 /shree2
+drwxr-xr-x   - hduser supergroup          0 2022-06-03 12:00 /sneha
+drwxrwxr-x   - hduser supergroup          0 2022-06-01 15:16 /tmp
+drwxr-xr-x   - hduser supergroup          0 2022-06-01 15:25 /user
+hduser@bmsce-Precision-T1700:~$ vi newfile.txt
+hduser@bmsce-Precision-T1700:~$ hdfs dfs -put /sneha/newfile.txt
+put: `.': No such file or directory
+hduser@bmsce-Precision-T1700:~$ hdfs dfs /sneha/newfile.txt
+/sneha/newfile.txt: Unknown command
+hduser@bmsce-Precision-T1700:~$ hdfs dfs -put newfile.txt /sneha/createdfile.txt
+hduser@bmsce-Precision-T1700:~$ hdfs dfs -cat /sneha/createdfile.txt
+Hello. Good Morning. 
+hduser@bmsce-Precision-T1700:~$ vi file.txt
+hduser@bmsce-Precision-T1700:~$ hdfs dfs -put file.txt/sneha/labfile.txt
+put: `.': No such file or directory
+hduser@bmsce-Precision-T1700:~$ hdfs dfs -put file.txt /sneha/labfile.txt
+hduser@bmsce-Precision-T1700:~$ hdfs dfs -cat /sneha/labfile.txt
+Hadoop practice lab.
+
+hduser@bmsce-Precision-T1700:~$ hdfs dfs -copyFromLocal file.txt /sneha/labfile2.txt
+hduser@bmsce-Precision-T1700:~$ hdfs dfs -cat /sneha/labfile2.txt
+Hadoop practice lab.
+
+hduser@bmsce-Precision-T1700:~$ hdfs dfs -ls /sneha
+Found 3 items
+-rw-r--r--   1 hduser supergroup         22 2022-06-03 12:06 /snehaa/createdfile.txt
+-rw-r--r--   1 hduser supergroup         22 2022-06-03 12:09 /sneha/labfile.txt
+-rw-r--r--   1 hduser supergroup         22 2022-06-03 12:10 /sneha/labfile2.txt
+hduser@bmsce-Precision-T1700:~$ ls
+ derby.log
+ Desktop
+ Desktp
+ Documents
+ Downloads
+ eclipse-workspace
+ examples.desktop
+ file.txt
+ G.txt
+ hadoop-2.6.0.tar.gz
+ hive
+'home\studentsinfo.csv'
+ idbi1
+ import_students_students_info.err.20190831_102223
+ lab6.txt
+ metastore_db
+ Music
+ newfile.txt
+'Packet Tracer 7.2.1 for Linux 64 bit.tar.gz'
+ Pictures
+ pig_1564816082257.log
+ pt
+ PT72Installer
+ Public
+ R
+ sidbi1
+ sidbi2
+ snap
+ studentsinfo.csv
+ Templates
+ text.txt
+ toinstalledlist
+ Videos
+hduser@bmsce-Precision-T1700:~$ hdfs dfs-copyToLocal /sneha/createdfile.txt /home/hduser/Desktop
+Error: Could not find or load main class dfs-copyToLocal
+hduser@bmsce-Precision-T1700:~$ hdfs dfs-copyToLocal /sneha/createdfile.txt /Desktop
+Error: Could not find or load main class dfs-copyToLocal
+hduser@bmsce-Precision-T1700:~$ hdfs dfs -copyToLocal /sneha/createdfile.txt /Desktop
+copyToLocal: /Desktop._COPYING_ (Permission denied)
+hduser@bmsce-Precision-T1700:~$ hdfs dfs -copyToLocal /sneha/createdfile.txt /Desktop
+copyToLocal: /Desktop._COPYING_ (Permission denied)
+hduser@bmsce-Precision-T1700:~$ vi  merge.txt /Downloads
+2 files to edit
+hduser@bmsce-Precision-T1700:~$ vi WC.txt /Downloads
+2 files to edit
+hduser@bmsce-Precision-T1700:~$ hdfs dfs -get /sneha/newWC.txt /Downloads/WC.txt
+hduser@bmsce-Precision-T1700:~$ hdfs dfs -get /sneha/newWC.txt home/hduser/Downloads/WC.txt
+get: `home/hduser/Downloads/WC.txt': No such file or directory
+hduser@bmsce-Precision-T1700:~$ ls
+ derby.log
+ Desktop
+ Desktp
+ Documents
+ Downloads
+ eclipse-workspace
+ examples.desktop
+ file.txt
+ G.txt
+ hadoop-2.6.0.tar.gz
+ hive
+'home\studentsinfo.csv'
+ idbi1
+ import_students_students_info.err.20190831_102223
+ lab6.txt
+ merge.txt
+ metastore_db
+ Music
+ newfile.txt
+'Packet Tracer 7.2.1 for Linux 64 bit.tar.gz'
+ Pictures
+ pig_1564816082257.log
+ pt
+ PT72Installer
+ Public
+ R
+ sidbi1
+ sidbi2
+ snap
+ studentsinfo.csv
+ Templates
+ text.txt
+ toinstalledlist
+ Videos
+ WC.txt
+hduser@bmsce-Precision-T1700:~$ vi test.txt /home/hduser/Desktop
+2 files to edit
+hduser@bmsce-Precision-T1700:~$ hdfs dfs -get /sneha/train.txt /home/hduser/Desktop/test.txt
+get: `/sneha/train.txt': No such file or directory
+hduser@bmsce-Precision-T1700:~$ hdfs dfs -cat /sneha/newfile.txt
+cat: `/sneha/newfile.txt': No such file or directory
+hduser@bmsce-Precision-T1700:~$ hdfs dfs -ls /sneha
+Found 3 items
+-rw-r--r--   1 hduser supergroup         22 2022-06-03 12:06 /sneha/createdfile.txt
+-rw-r--r--   1 hduser supergroup         22 2022-06-03 12:09 /sneha/labfile.txt
+-rw-r--r--   1 hduser supergroup         22 2022-06-03 12:10 /sneha/labfile2.txt
+hduser@bmsce-Precision-T1700:~$ hdfs dfs -cat /sneha/labfile.txt
+Hadoop practice lab.
+
+hduser@bmsce-Precision-T1700:~$ hdfs dfs -mkdir /srishti
+hduser@bmsce-Precision-T1700:~$ hdfs dfs -ls 
+ls: `.': No such file or directory
+hduser@bmsce-Precision-T1700:~$ hdfs dfs -ls /
+Found 7 items
+drwxr-xr-x   - hduser supergroup          0 2022-06-01 09:45 /195
+drwxr-xr-x   - hduser supergroup          0 2022-05-31 10:20 /geto
+drwxr-xr-x   - hduser supergroup          0 2022-05-31 10:17 /shree2
+drwxr-xr-x   - hduser supergroup          0 2022-06-03 12:10 /sneha
+drwxr-xr-x   - hduser supergroup          0 2022-06-03 12:30 /srishti
+drwxrwxr-x   - hduser supergroup          0 2022-06-01 15:16 /tmp
+drwxr-xr-x   - hduser supergroup          0 2022-06-01 15:25 /user
+hduser@bmsce-Precision-T1700:~$ hdfs dfs -mv /sneha/createdfile.txt /srishti
+hduser@bmsce-Precision-T1700:~$ hdfs dfs -ls /srishti
+Found 1 items
+-rw-r--r--   1 hduser supergroup         22 2022-06-03 12:06 /srishti/createdfile.txt
+hduser@bmsce-Precision-T1700:~$ hdfs dfs -ls /sneha
+Found 2 items
+-rw-r--r--   1 hduser supergroup         22 2022-06-03 12:09 /sneha/labfile.txt
+hduser@bmsce-Precision-T1700:~$ hdfs dfs -cp /sneha/labfile.txt /srishti/newlabfile.txt
+hduser@bmsce-Precision-T1700:~$ hdfs dfs -ls /srishti
+Found 2 items
+-rw-r--r--   1 hduser supergroup         22 2022-06-03 12:06 /srishti/createdfile.txt
+hduser@bmsce-Precision-T1700:~$ hdfs dfs -get /sneha/labfile2.txt /home/hduser/Downloads/newlabfile.txt
+get: `/home/hduser/Downloads/newlabfile.txt': File exists
+hduser@bmsce-Precision-T1700:~$ hdfs dfs -copyToLocal /sneha/labfile.txt /home/hduser/Downloads/newlabfile2.txt
+hduser@bmsce-Precision-T1700:~$ 
+
+
